@@ -16,4 +16,4 @@ All notable changes to this project are documented here. The format follows
 - CI: ruff, mypy, tests on Python 3.10 to 3.12 with coverage, demo smoke test and Docker build.
 - Built on Spark 4.2 and Delta Lake 4.4, kept current by grouped Dependabot updates.
 
-[0.1.0]: https://github.com/sagarkonkanagaon-netizenk/spark-pipeline-labs/releases/tag/v0.1.0
+[0.1.0]: https://github.com/sagarkonkanagaon-netizenk/spark-pipeline-labs/releases/tag/V0.1.0
