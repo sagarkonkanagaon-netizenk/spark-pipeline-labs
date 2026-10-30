@@ -1,0 +1,16 @@
+name: Lab idea
+description: Suggest a data-engineering problem worth a lab
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What breaks in real pipelines, and how you'd notice.
+    validations:
+      required: true
+  - type: textarea
+    id: property
+    attributes:
+      label: The property a test should prove
+      placeholder: e.g. "rerunning the job produces identical output"
