@@ -5,3 +5,6 @@ __pycache__/
 spark-warehouse/
 metastore_db/
 derby.log
+.coverage
+.mypy_cache/
+.ruff_cache/
