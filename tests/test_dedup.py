@@ -7,8 +7,7 @@ from labs.dedup import run_dedup
 def _write_events(directory, name, events):
     directory.mkdir(parents=True, exist_ok=True)
     with open(directory / name, "w") as f:
-        for e in events:
-            f.write(json.dumps(e) + "\n")
+        f.writelines(json.dumps(e) + "\n" for e in events)
 
 
 def _events(start, n, prefix="e"):

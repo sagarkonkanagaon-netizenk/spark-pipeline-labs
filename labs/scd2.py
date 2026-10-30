@@ -5,9 +5,10 @@ expires it) and once with a NULL merge key (never matches, so it is inserted as
 the new current version). Unchanged keys match but fail the hash condition, so a
 rerun of the same batch is a no-op.
 """
-from pyspark.sql import DataFrame, SparkSession, Window
-from pyspark.sql import functions as F
+
 from delta.tables import DeltaTable
+from pyspark.sql import Column, DataFrame, SparkSession, Window
+from pyspark.sql import functions as F
 
 
 def latest_per_key(cdc: DataFrame, key: str, order_col: str) -> DataFrame:
@@ -59,7 +60,7 @@ def apply_scd2(
         changed.withColumn("merge_key", F.lit(None).cast(updates.schema[key].dataType))
     )
 
-    insert_values = {c: f"s.{c}" for c in columns}
+    insert_values: dict[str, str | Column] = {c: f"s.{c}" for c in columns}
     insert_values.update(
         {
             "row_hash": "s.row_hash",

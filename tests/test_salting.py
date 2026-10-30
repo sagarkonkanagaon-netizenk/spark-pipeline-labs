@@ -1,6 +1,6 @@
 from pyspark.sql import functions as F
 
-from labs.salting import find_hot_keys, salted_join
+from labs.salting import add_salt, find_hot_keys, salted_join
 
 
 def _skewed(spark):
@@ -34,14 +34,17 @@ def test_salted_join_returns_exactly_the_plain_join(spark):
 
 
 def test_hot_key_is_spread_across_buckets(spark):
-    facts, dims = _skewed(spark)
+    facts, _ = _skewed(spark)
     buckets = 8
-    is_hot = F.col("customer_id") == "c_hot"
-    salted = facts.withColumn(
-        "_salt", F.when(is_hot, (F.rand(seed=7) * buckets).cast("int")).otherwise(0)
-    )
-    per_bucket = salted.where(is_hot).groupBy("_salt").count().collect()
+    salted = add_salt(facts, "customer_id", ["c_hot"], buckets)
+    per_bucket = salted.where("customer_id = 'c_hot'").groupBy("_salt").count().collect()
 
     assert len(per_bucket) == buckets
     # no bucket holds more than twice its fair share of the hot key
     assert max(r["count"] for r in per_bucket) < 2 * 900 / buckets
+
+
+def test_cold_keys_are_not_salted(spark):
+    facts, _ = _skewed(spark)
+    salted = add_salt(facts, "customer_id", ["c_hot"], 8)
+    assert salted.where("customer_id <> 'c_hot' AND _salt <> 0").count() == 0

@@ -5,12 +5,13 @@ Delta's replaceWhere. Finished days are recorded in a small Delta ledger after a
 row-count audit, so a killed job resumes from the first gap and a full rerun
 leaves the target identical.
 """
-from datetime import date, timedelta
-from typing import Callable, Iterator
 
+from collections.abc import Callable, Iterator
+from datetime import date, timedelta
+
+from delta.tables import DeltaTable
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
-from delta.tables import DeltaTable
 
 
 def days(start: date, end: date) -> Iterator[date]:
@@ -43,9 +44,7 @@ def load_day(
         .partitionBy(partition_col)
         .save(target_path)
     )
-    written = (
-        spark.read.format("delta").load(target_path).where(f"{partition_col} = '{d}'").count()
-    )
+    written = spark.read.format("delta").load(target_path).where(f"{partition_col} = '{d}'").count()
     if written != expected:
         raise RuntimeError(f"{d}: expected {expected} rows, found {written}")
     return written
@@ -67,8 +66,8 @@ def backfill(
         if day in done:
             continue
         load_day(spark, extract, target_path, day)
-        spark.createDataFrame([(day,)], "day date").write.format("delta").mode(
-            "append"
-        ).save(ledger_path)
+        spark.createDataFrame([(day,)], "day date").write.format("delta").mode("append").save(
+            ledger_path
+        )
         processed.append(day)
     return processed
