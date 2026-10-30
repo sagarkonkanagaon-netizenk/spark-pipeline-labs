@@ -2,8 +2,8 @@
 
 [![ci](https://github.com/sagarkonkanagaon-netizenk/spark-pipeline-labs/actions/workflows/ci.yml/badge.svg)](https://github.com/sagarkonkanagaon-netizenk/spark-pipeline-labs/actions/workflows/ci.yml)
 ![python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-3776AB)
-![spark](https://img.shields.io/badge/spark-4.0-E25A1C)
-![delta](https://img.shields.io/badge/delta%20lake-4.0-00ADD4)
+![spark](https://img.shields.io/badge/spark-4.2-E25A1C)
+![delta](https://img.shields.io/badge/delta%20lake-4.4-00ADD4)
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 **Production data-engineering patterns as runnable, tested PySpark + Delta Lake code.**

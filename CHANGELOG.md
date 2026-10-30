@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Upgraded to Spark 4.2 and Delta Lake 4.4, upgraded together through a grouped Dependabot update.
+- GitHub Actions: checkout v7, setup-python v7, setup-java v6.
+
 ## [0.1.0] - 2026-10-30
 
 ### Added
