@@ -4,7 +4,14 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      # pyspark and delta-spark must move together: each Delta release targets one Spark minor
+      spark-and-delta:
+        patterns: ["pyspark", "delta-spark"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
