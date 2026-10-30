@@ -3,7 +3,7 @@ name = "spark-pipeline-labs"
 version = "0.1.0"
 description = "Runnable PySpark + Delta Lake labs: streaming dedup, SCD2 MERGE, skew salting, idempotent backfill"
 requires-python = ">=3.10"
-dependencies = ["pyspark==4.0.1", "delta-spark==4.0.0"]
+dependencies = ["pyspark==4.0.1", "delta-spark==4.4.1"]
 
 authors = [{ name = "Sagar Konkanagaon", email = "sagarkonkanagaon@gmail.com" }]
 license = { file = "LICENSE" }
