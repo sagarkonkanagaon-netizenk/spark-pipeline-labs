@@ -14,6 +14,7 @@ a merge that's safe to rerun, a backfill that resumes from where it died.
 
 These are the working code behind the mini projects on
 [The Data Foundry](https://data-foundry-sand.vercel.app).
+The ideas behind them are taught step by step on [Data Dhaba](https://datadhaba.in), a data engineering learning site.
 
 ## Labs
 
